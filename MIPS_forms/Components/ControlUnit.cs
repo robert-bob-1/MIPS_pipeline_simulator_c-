@@ -28,7 +28,7 @@ namespace MIPS_forms.Components
             AllPorts = AllPorts.Concat(PredefinedPorts).ToDictionary(x => x.Key, x => x.Value);
 
             //get opcode
-            int opcode = AllPorts["instruction"] % 67108864;
+            int opcode = AllPorts["instruction"] / (2 ^ 25);
 
             OutPorts["jump"] = 0;
             OutPorts["memToReg"] = 0;
