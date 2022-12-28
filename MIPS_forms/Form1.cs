@@ -93,7 +93,7 @@ namespace MIPS_forms
             instructionMemory.ConnectComponent(IFID, "instr5_0"  , "instr5_0");
             instructionMemory.ConnectComponent(IFID, "instr15_11", "instr15_11");
 
-            IFID.ConnectComponent(jumpMUX, "pc+1", "input1");
+            IFID.ConnectComponent(jumpMUX, "instr15_0", "input1");
             //IFID.ConnectComponent(pcSrcMUX, "pc+1", "input1");
             IFID.ConnectComponent(controlUnit, "instr31_26", "opcode");
             IFID.ConnectComponent(registerFile, "instr25_21", "readAddress1");
