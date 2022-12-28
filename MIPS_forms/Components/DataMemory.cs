@@ -12,12 +12,24 @@ namespace MIPS_forms.Components
         public int[] memory = new int[2 ^ 31];
         public DataMemory(Clock clock)
         {
+            memory[0] = 5;
+            memory[1] = 5;
             clk = clock;
             InPorts["address"] = 0;
             InPorts["writeData"] = 0;
             InPorts["memWrite"] = 0;
             OutPorts["readData"] = 0;
         }
+        public string memoryToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < memory.Length; i++)
+            {
+                sb.AppendLine(i.ToString() + ": " + memory[i].ToString());
+            }
+            return sb.ToString();
+        }
+
         public override void UpdateOutput()
         {
             Dictionary<string, int> AllPorts = InPorts.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);

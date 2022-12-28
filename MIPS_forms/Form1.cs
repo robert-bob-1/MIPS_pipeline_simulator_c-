@@ -1,5 +1,6 @@
 using MIPS_forms.Components;
 using MIPS_forms.Utils;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MIPS_forms
 {
@@ -9,7 +10,7 @@ namespace MIPS_forms
 
         Clock clock = new Clock();
         //IF
-        Mux2_1 pcSrcMUX = new Mux2_1("input1", 0);
+        Mux2_1 pcSrcMUX = new Mux2_1();
         
         Mux2_1 jumpMUX = new Mux2_1();
         PC pc;
@@ -49,10 +50,10 @@ namespace MIPS_forms
             listIDEX.AddRange(new List<String> { "memToReg", "regWrite", "memWrite", "branch", "ALUOp", "ALUSrc", "regDst", "pc+1", 
                                                 "rd1", "rd2", "instr5_0", "instr15_0", "instr20_16", "instr15_11" });
             List<String> listEXMEM = new List<String>();
-            listEXMEM.AddRange(new List<String> { "memToReg", "regWrite", "memWrite", "branch", "branchAddress", "zero", "aluResult",
-                                                "pc+1", "rd2", "writeAddress"});
+            listEXMEM.AddRange(new List<String> { "memToReg", "regWrite", "memWrite", "branch", "branchAddress", "zero", "ALUResult",
+                                                "rd2", "writeAddress"});
             List<String> listMEMWB = new List<String>();
-            listMEMWB.AddRange(new List<String> { "memToReg", "regWrite", "readData", "aluResult", "writeAddress" });
+            listMEMWB.AddRange(new List<String> { "memToReg", "regWrite", "readData", "ALUResult", "writeAddress" });
 
             //instrucion fetch components
             pc = new PC(clock);
@@ -63,12 +64,11 @@ namespace MIPS_forms
             IDEX = new RegisterWall(listIDEX, clock);
 
             ////execution components
-            //registerFile = new RegisterFile(clock);
-            //IDEX = new RegisterWall(listIDEX, clock);
+            EXMEM = new RegisterWall(listEXMEM, clock);
 
-            ////memory components
-            //registerFile = new RegisterFile(clock);
-            //IDEX = new RegisterWall(listIDEX, clock);
+            //memory components
+            dataMemory= new DataMemory(clock);
+            MEMWB = new RegisterWall(listMEMWB, clock);
 
             //writeback components
 
@@ -117,14 +117,14 @@ namespace MIPS_forms
             registerFile.ConnectComponent(IDEX, "readData2", "rd2");
 
             IDEX.ConnectComponent(EXMEM, "memToReg", "memToReg");
-            IDEX.ConnectComponent(EXMEM, "memToReg", "memToReg");
             IDEX.ConnectComponent(EXMEM, "regWrite", "regWrite");
             IDEX.ConnectComponent(EXMEM, "memWrite", "memWrite");
             IDEX.ConnectComponent(EXMEM, "branch", "branch");
+            IDEX.ConnectComponent(EXMEM, "rd2", "rd2");
             IDEX.ConnectComponent(adderEX, "pc+1", "input0");
             IDEX.ConnectComponent(adderEX, "instr15_0", "input1");
             IDEX.ConnectComponent(alu, "rd1", "rd1");
-            IDEX.ConnectComponent(aluMUX, "rd1", "input0");
+            IDEX.ConnectComponent(aluMUX, "rd2", "input0");
             IDEX.ConnectComponent(aluMUX, "instr15_0", "input1");
             IDEX.ConnectComponent(aluMUX, "ALUSrc", "select");
             IDEX.ConnectComponent(aluCtrl, "ALUOp", "ALUOp");
@@ -134,12 +134,34 @@ namespace MIPS_forms
             IDEX.ConnectComponent(regMUX, "regDst", "select");
 
             //EX
-            adderEX.ConnectComponent(EXMEM, "output", "writeAddress");
-            adderEX.ConnectComponent(EXMEM, "output", "writeAddress");
+            adderEX.ConnectComponent(EXMEM, "output", "branchAddress");
+            aluMUX.ConnectComponent(alu, "output", "rd2");
+            alu.ConnectComponent(EXMEM, "zero", "zero");
+            alu.ConnectComponent(EXMEM, "ALUResult", "ALUResult");
+            regMUX.ConnectComponent(EXMEM, "output", "writeAddress");
 
+            EXMEM.ConnectComponent(MEMWB, "memToReg", "memToReg");
+            EXMEM.ConnectComponent(MEMWB, "regWrite", "regWrite");
+            EXMEM.ConnectComponent(pcSrcMUX, "branchAddress", "input1");
+            EXMEM.ConnectComponent(and, "branch", "input0");
+            EXMEM.ConnectComponent(dataMemory, "memWrite", "memWrite");
+            EXMEM.ConnectComponent(and, "zero", "zero");
+            EXMEM.ConnectComponent(dataMemory, "ALUResult", "address");
+            EXMEM.ConnectComponent(dataMemory, "rd2", "writeData");
+            EXMEM.ConnectComponent(MEMWB, "ALUResult", "ALUResult");
+            EXMEM.ConnectComponent(MEMWB, "writeAddress", "writeAddress");
 
+            //MEM
+            dataMemory.ConnectComponent(MEMWB, "readData", "readData");
 
-            //IDEX.ConnectComponent();
+            MEMWB.ConnectComponent(registerFile, "regWrite", "regWrite");
+            MEMWB.ConnectComponent(memMUX, "memToReg", "select");
+            MEMWB.ConnectComponent(memMUX, "readData", "input1");
+            MEMWB.ConnectComponent(memMUX, "ALUResult", "input0");
+            MEMWB.ConnectComponent(registerFile, "writeAddress", "writeAddress");
+
+            //WB
+            memMUX.ConnectComponent(registerFile, "output", "writeData");
 
         }
 
@@ -151,6 +173,8 @@ namespace MIPS_forms
         private void button1_Click(object sender, EventArgs e)
         {
             clock.Increase();
+         
+            //////////////////// IF ///////////////////////
             pcSrcMUX.UpdateOutput();
             pcsrcMUXTextBox.Text = pcSrcMUX.PrintSignals();
 
@@ -168,10 +192,52 @@ namespace MIPS_forms
 
             IFID.UpdateOutput();
             IFIDTextBox.Text = IFID.PrintSignals();
-            /////////////////////////////////////
+
+            ///////////////////// ID ////////////////////////
             
             controlUnit.UpdateOutput();
             MainControlTextBox.Text = controlUnit.PrintSignals();
+
+            registerFile.UpdateOutput();
+            RegisterFileTextBox.Text = registerFile.PrintSignals();
+            RegisterFileTextBox2.Text = registerFile.memoryToString();
+
+            IDEX.UpdateOutput();
+            IDEXTextBox.Text = IDEX.PrintSignals();
+
+            ///////////////////// EX ////////////////////////
+            adderEX.UpdateOutput();
+            BranchAddressTextBox.Text = adderEX.PrintSignals();
+
+            aluMUX.UpdateOutput();
+            ALUSrcMUXTextBox.Text= aluMUX.PrintSignals();
+
+            aluCtrl.UpdateOutput();
+            ALUControlTextBox.Text = aluCtrl.PrintSignals();
+
+            alu.UpdateOutput();
+            ALUTextBox.Text= alu.PrintSignals();
+
+            regMUX.UpdateOutput();
+            RegDstMUXTextBox.Text = regMUX.PrintSignals();
+
+            EXMEM.UpdateOutput();
+            EXMEMTextBox.Text= EXMEM.PrintSignals();
+
+            ////////////////////// MEM ///////////////////////
+            and.UpdateOutput();
+            BranchAddressTextBox.Text= and.PrintSignals();
+            
+            dataMemory.UpdateOutput();
+            DataMemoryTextBox.Text= dataMemory.PrintSignals();
+            DataMemoryTextBox2.Text = dataMemory.memoryToString();
+
+            MEMWB.UpdateOutput();
+            MEMWBTextBox.Text= MEMWB.PrintSignals();
+
+            ////////////////////// WB /////////////////////////
+            memMUX.UpdateOutput();
+            MemtoRegTextBox.Text= memMUX.PrintSignals();
 
         }
 

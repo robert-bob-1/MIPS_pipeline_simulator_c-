@@ -41,12 +41,12 @@ namespace MIPS_forms.Components
                 throw new ArgumentException("given signal name is predefined and cannot be changed");
             }
             InPorts[signalName] = value;
-            _updatedSignals++;
+            //_updatedSignals++;
 
-            if(_updatedSignals + _predefinedInputs == InPorts.Count)
-            {
-                //UpdateOutput();
-            }
+            //if(_updatedSignals + _predefinedInputs == InPorts.Count)
+            //{
+            //    //UpdateOutput();
+            //}
         }
 
         public void SetPredefinedInput(string inputName, int value)

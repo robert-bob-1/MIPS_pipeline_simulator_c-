@@ -13,15 +13,25 @@ namespace MIPS_forms.Components
         
         public InstructionMemory()
         {
-            instructionMemory.AddRange(new List<String> { "add r1, r2, r3",
-                                                          "jump 4",
+            instructionMemory.AddRange(new List<String> { "add r3, r2, r1",
+                                                          "noop",
+                                                          "noop",
                                                           "noop",
                                                           "lw r1, 0(r0)",
                                                           "lw r2, 1(r0)",
+                                                          "noop",
+                                                          "noop",
+                                                          "noop",
                                                           "beq r1, r2, 1",
                                                           "noop",
+                                                          "noop",
+                                                          "noop",
                                                           "add r1, r2, r3",
-                                                          "sw r3, 3(r0)"
+                                                          "noop",
+                                                          "noop",
+                                                          "noop",
+                                                          "sw r3, 3(r0)",
+                                                          "jump 0"
 
                                                             });
             InPorts["pc_in"] = 0;
@@ -185,8 +195,11 @@ namespace MIPS_forms.Components
 
         public override string PrintSignals()
         {
-            string signals = "current: " + instructionMemory.ElementAt(InPorts["pc_in"]) + "\n";
-
+            string signals;
+            if (InPorts["pc_in"] < instructionMemory.Count)
+                signals = "current: " + instructionMemory.ElementAt(InPorts["pc_in"]) + "\n";
+            else
+                signals = "no more instructions";
             foreach (KeyValuePair<string, int> kvp in InPorts)
             {
                 signals += kvp.Key + ":" + kvp.Value + "\n";
@@ -211,7 +224,11 @@ namespace MIPS_forms.Components
             int pc_in = AllPorts["pc_in"];
             //for assembly-like instruction s
             //OutPorts["pc_out"] = instructionMemory.ElementAt(pc_in % instructionMemory.Count);
-            instructionToInt(instructionMemory.ElementAt(pc_in % instructionMemory.Count));
+            if (InPorts["pc_in"] < instructionMemory.Count)
+                instructionToInt(instructionMemory.ElementAt(pc_in));
+            else
+                instructionToInt("noop");
+
 
             //connect to other components here
             for (int i = 0; i < connectedComponents.Count(); i++)

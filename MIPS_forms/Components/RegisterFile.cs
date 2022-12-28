@@ -12,6 +12,7 @@ namespace MIPS_forms.Components
         public int[] memory = new int[2^5];
         public RegisterFile(Clock clock)
         {
+            memory[1] = 10; memory[2] = 1;
             clk = clock;
             InPorts["readAddress1"] = 0;
             InPorts["readAddress2"] = 0;
@@ -20,6 +21,16 @@ namespace MIPS_forms.Components
             InPorts["regWrite"] = 0;
             OutPorts["readData1"] = 0;
             OutPorts["readData2"] = 0;
+        }
+
+        public string memoryToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < memory.Length; i++)
+            {
+                sb.AppendLine(i.ToString() + ": " + memory[i].ToString());
+            }
+            return sb.ToString();
         }
         public override void UpdateOutput()
         {
