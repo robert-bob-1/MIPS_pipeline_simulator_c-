@@ -11,10 +11,10 @@ namespace MIPS_forms.Components
     {
         public Mux2_1()
         {
-            InPorts["input0"] = -1;
-            InPorts["input1"] = -1;
-            InPorts["select"] = -1;
-            OutPorts["output"] = -1;
+            InPorts["input0"] = 0;
+            InPorts["input1"] = 0;
+            InPorts["select"] = 0;
+            OutPorts["output"] = 0;
         }
 
         //set an input to a permanent value

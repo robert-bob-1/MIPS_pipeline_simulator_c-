@@ -6,36 +6,25 @@ using System.Threading.Tasks;
 
 namespace MIPS_forms.Components
 {
-    class Adder : AbstractComponent 
+    class And : AbstractComponent
     {
-        public Adder()
+        public And()
         {
             InPorts["input0"] = -1;
             InPorts["input1"] = -1;
             OutPorts["output"] = -1;
-        }
-
-        //set an input to a permanent value
-        public Adder(string inputName, int inputValue)
-        {
-            InPorts["input0"] = -1;
-            InPorts["input1"] = -1;
-            OutPorts["output"] = -1;
-
-            SetPredefinedInput(inputName, inputValue);
         }
         public override void UpdateOutput()
         {
-            //adding inports and predefinedPorts together to operate using all of them
             Dictionary<string, int> AllPorts = InPorts.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             AllPorts = AllPorts.Concat(PredefinedPorts).ToDictionary(x => x.Key, x => x.Value);
 
             int input0 = AllPorts["input0"];
             int input1 = AllPorts["input1"];
 
-            OutPorts["output"] = input0 + input1;
+            OutPorts["output"] = input0 & input1;
             //send signals to other components here
-            for (int i = 0; i < connectedComponents.Count; i++)
+            for (int i = 0; i < connectedComponents.Count(); i++)
             {
                 connectedComponents[i].SetSignal(connectedComponentPort[i], OutPorts[connectedOutput[i]]);
             }

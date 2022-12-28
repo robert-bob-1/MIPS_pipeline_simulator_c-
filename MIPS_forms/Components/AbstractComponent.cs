@@ -45,7 +45,7 @@ namespace MIPS_forms.Components
 
             if(_updatedSignals + _predefinedInputs == InPorts.Count)
             {
-                UpdateOutput();
+                //UpdateOutput();
             }
         }
 
@@ -58,5 +58,22 @@ namespace MIPS_forms.Components
 
         public abstract void UpdateOutput();
 
+        public virtual string PrintSignals()
+        {
+            string signals = "";
+
+            foreach(KeyValuePair<string, int> kvp in InPorts)
+            {
+                signals += kvp.Key + ":" + kvp.Value + "\n";
+            }
+            signals += "\n";
+            foreach (KeyValuePair<string, int> kvp in OutPorts)
+            {
+                signals += kvp.Key + ":" + kvp.Value + "\n";
+            }
+            
+
+            return signals;
+        }
     }
 }

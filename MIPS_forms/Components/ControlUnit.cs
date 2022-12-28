@@ -10,7 +10,7 @@ namespace MIPS_forms.Components
     {
         public ControlUnit()
         {
-            InPorts["instruction"] = -1;
+            InPorts["opcode"] = -1;
             OutPorts["jump"] = 0;
             OutPorts["memToReg"] = 0;
             OutPorts["regWrite"] = 0;
@@ -28,7 +28,7 @@ namespace MIPS_forms.Components
             AllPorts = AllPorts.Concat(PredefinedPorts).ToDictionary(x => x.Key, x => x.Value);
 
             //get opcode
-            int opcode = AllPorts["instruction"] / (2 ^ 25);
+            int opcode = AllPorts["opcode"];
 
             OutPorts["jump"] = 0;
             OutPorts["memToReg"] = 0;
@@ -55,8 +55,55 @@ namespace MIPS_forms.Components
                     OutPorts["regWrite"] = 1;
                     OutPorts["ALUOp"] = 1;
                     break;
-                //lw
+                //subi
                 case 2:
+                    OutPorts["extOp"] = 1;
+                    OutPorts["ALUSrc"] = 1;
+                    OutPorts["regWrite"] = 1;
+                    OutPorts["ALUOp"] = 2;
+                    break;
+                //andi
+                case 3: //extop posibil redundant
+                    OutPorts["extOp"] = 1;
+                    OutPorts["ALUSrc"] = 1;
+                    OutPorts["regWrite"] = 1;
+                    OutPorts["ALUOp"] = 3;
+                    break;
+                //ori
+                case 4: //extop posibil redundant
+                    OutPorts["extOp"] = 1;
+                    OutPorts["ALUSrc"] = 1;
+                    OutPorts["regWrite"] = 1;
+                    OutPorts["ALUOp"] = 4;
+                    break;
+                //beq
+                case 5:
+                    OutPorts["extOp"] = 1;
+                    OutPorts["branch"] = 1;
+                    OutPorts["ALUOp"] = 5;
+                    break;
+                //bneq
+                case 6:
+                    OutPorts["extOp"] = 1;
+                    OutPorts["branch"] = 1;
+                    OutPorts["ALUOp"] = 6; //trebuie caz separat in alu pt bneq
+                    break;
+                //sll
+                case 7: //extop posibil redundant
+                    OutPorts["extOp"] = 1;
+                    OutPorts["ALUSrc"] = 1;
+                    OutPorts["regWrite"] = 1;
+                    OutPorts["ALUOp"] = 7;
+                    break;
+                //slr
+                case 8: //extop posibil redundant
+                    OutPorts["extOp"] = 1;
+                    OutPorts["ALUSrc"] = 1;
+                    OutPorts["regWrite"] = 1;
+                    OutPorts["ALUOp"] = 8;
+                    break;
+                //lw
+                case 10:
                     OutPorts["extOp"] = 1;
                     OutPorts["ALUSrc"] = 1;
                     OutPorts["memToReg"] = 1;
@@ -64,33 +111,15 @@ namespace MIPS_forms.Components
                     OutPorts["ALUOp"] = 1;
                     break;
                 //sw
-                case 3:
+                case 9:
                     OutPorts["extOp"] = 1;
                     OutPorts["ALUSrc"] = 1;
                     OutPorts["memWrite"] = 1;
                     OutPorts["regWrite"] = 1;
                     OutPorts["ALUOp"] = 1;
                     break;
-                //beq
-                case 4:
-                    OutPorts["extOp"] = 1;
-                    OutPorts["branch"] = 1;
-                    OutPorts["ALUOp"] = 2;
-                    break;
-                //andi
-                case 5:
-                    OutPorts["ALUSrc"] = 1;
-                    OutPorts["regWrite"] = 1;
-                    OutPorts["ALUOp"] = 5;
-                    break;
-                //ori
-                case 6:
-                    OutPorts["ALUSrc"] = 1;
-                    OutPorts["regWrite"] = 1;
-                    OutPorts["ALUOp"] = 6;
-                    break;
                 //jump
-                case 7:
+                case 11:
                     OutPorts["jump"] = 1;
                     break;
 

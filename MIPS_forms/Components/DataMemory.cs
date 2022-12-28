@@ -7,42 +7,35 @@ using MIPS_forms.Utils;
 
 namespace MIPS_forms.Components
 {
-    class RegisterFile : AbstractComponent
+    class DataMemory : AbstractComponent
     {
-        public int[] memory = new int[2^5];
-        public RegisterFile(Clock clock)
+        public int[] memory = new int[2 ^ 31];
+        public DataMemory(Clock clock)
         {
             clk = clock;
-            InPorts["readAddress1"] = 0;
-            InPorts["readAddress2"] = 0;
-            InPorts["writeAddress"] = 0;
+            InPorts["address"] = 0;
             InPorts["writeData"] = 0;
-            InPorts["regWrite"] = 0;
-            OutPorts["readData1"] = 0;
-            OutPorts["readData2"] = 0;
+            InPorts["memWrite"] = 0;
+            OutPorts["readData"] = 0;
         }
         public override void UpdateOutput()
         {
             Dictionary<string, int> AllPorts = InPorts.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             AllPorts.Concat(PredefinedPorts).ToDictionary(x => x.Key, x => x.Value);
 
-            int readAddress1 = AllPorts["readAddress1"];
-            int readAddress2 = AllPorts["readAddress2"];
-            int writeAddress = AllPorts["writeAddress"];
+            int address = AllPorts["address"];
             int writeData = AllPorts["writeData"];
-            int regWrite = AllPorts["regWrite"];
+            int memWrite = AllPorts["memWrite"];
 
             if (ClkCheck == clk.Get())
             {
                 ClkCheck++;
-                if (regWrite == 1)
+                if (memWrite == 1)
                 {
-                    memory[writeAddress] = writeData;
+                    memory[address] = writeData;
                 }
             }
-            OutPorts["readData1"] = memory[readAddress1];
-            OutPorts["readData2"] = memory[readAddress2];
-
+            OutPorts["readData"] = memory[address];
 
             //connect to other components here
             for (int i = 0; i < connectedComponents.Count(); i++)

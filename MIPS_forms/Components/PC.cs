@@ -13,20 +13,20 @@ namespace MIPS_forms.Components
         public PC(Clock clock)
         {
             clk = clock;
-            InPorts["input"] = 0;   
-            OutPorts["output"] = 0;
+            InPorts["pc_in"] = 0;   
+            OutPorts["pc_out"] = 0;
         }
         public override void UpdateOutput()
         {
             Dictionary<string, int> AllPorts = InPorts.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             AllPorts.Concat(PredefinedPorts).ToDictionary(x => x.Key, x => x.Value);
 
-            int input = AllPorts["input"];
+            int input = AllPorts["pc_in"];
 
             if(ClkCheck == clk.Get())
             {
                 ClkCheck++;
-                OutPorts["output"] = input;
+                OutPorts["pc_out"] = input;
             }
 
             //connect to other components here

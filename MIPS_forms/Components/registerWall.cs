@@ -17,7 +17,7 @@ namespace MIPS_forms.Components
         public RegisterWall(List<String> signals, Clock clock)
         {
             this.clk = clock;
-            this.signals = signals;
+            this.signals = signals.ToList();
             for (int i = 0; i < signals.Count; i++)
             {
                 InPorts["input" + signals.ElementAt(i)] = 0;
