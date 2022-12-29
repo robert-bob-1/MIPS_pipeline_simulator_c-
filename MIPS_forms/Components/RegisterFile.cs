@@ -9,10 +9,16 @@ namespace MIPS_forms.Components
 {
     class RegisterFile : AbstractComponent
     {
-        public int[] memory = new int[2^5];
+        public int[] memory = new int[32];
         public RegisterFile(Clock clock)
         {
-            memory[1] = 10; memory[2] = 1;
+            for (int i = 0; i < 11;i++)
+            {
+                memory[i] = 1;
+            }
+            memory[6] = 7;
+            memory[8] = 11;
+            memory[12] = 75;
             clk = clock;
             InPorts["readAddress1"] = 0;
             InPorts["readAddress2"] = 0;
@@ -43,14 +49,14 @@ namespace MIPS_forms.Components
             int writeData = AllPorts["writeData"];
             int regWrite = AllPorts["regWrite"];
 
-            if (ClkCheck == clk.Get())
-            {
-                ClkCheck++;
-                if (regWrite == 1)
-                {
-                    memory[writeAddress] = writeData;
-                }
-            }
+            //if (ClkCheck == clk.Get())
+            //{
+            //    ClkCheck++;
+            //    if (regWrite == 1)
+            //    {
+            //        memory[writeAddress] = writeData;
+            //    }
+            //}
             OutPorts["readData1"] = memory[readAddress1];
             OutPorts["readData2"] = memory[readAddress2];
 
@@ -59,6 +65,34 @@ namespace MIPS_forms.Components
             for (int i = 0; i < connectedComponents.Count(); i++)
             {
                 connectedComponents[i].SetSignal(connectedComponentPort[i], OutPorts[connectedOutput[i]]);
+            }
+        }
+        public void WriteToRegisterFile()
+        {
+            if (InPorts["regWrite"] == 1)
+            {
+                memory[InPorts["writeAddress"]] = InPorts["writeData"];
+            }
+        }
+        public override void ResetComponent()
+        {
+            foreach (KeyValuePair<string, int> kvp in InPorts)
+            {
+                InPorts[kvp.Key] = 0;
+            }
+            foreach (KeyValuePair<string, int> kvp in OutPorts)
+            {
+                OutPorts[kvp.Key] = 0;
+            }
+        }
+        public void SetMemory(string values)
+        {
+            string s = values;
+            string[] strings = s.Split('\n');
+            Array.Fill(memory, 0);
+            for (int i = 0; i < strings.Length; i++)
+            {
+                memory[i] = int.Parse(strings[i]);
             }
         }
     }

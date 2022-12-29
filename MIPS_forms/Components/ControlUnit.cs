@@ -50,6 +50,7 @@ namespace MIPS_forms.Components
                     break;
                 //addi
                 case 1: //extop posibil redundant
+                    OutPorts["regDst"] = 1;
                     OutPorts["extOp"] = 1;
                     OutPorts["ALUSrc"] = 1;
                     OutPorts["regWrite"] = 1;
@@ -57,6 +58,7 @@ namespace MIPS_forms.Components
                     break;
                 //subi
                 case 2:
+                    OutPorts["regDst"] = 1;
                     OutPorts["extOp"] = 1;
                     OutPorts["ALUSrc"] = 1;
                     OutPorts["regWrite"] = 1;
@@ -65,12 +67,14 @@ namespace MIPS_forms.Components
                 //andi
                 case 3: //extop posibil redundant
                     OutPorts["extOp"] = 1;
+                    OutPorts["regDst"] = 1;
                     OutPorts["ALUSrc"] = 1;
                     OutPorts["regWrite"] = 1;
                     OutPorts["ALUOp"] = 3;
                     break;
                 //ori
                 case 4: //extop posibil redundant
+                    OutPorts["regDst"] = 1;
                     OutPorts["extOp"] = 1;
                     OutPorts["ALUSrc"] = 1;
                     OutPorts["regWrite"] = 1;
@@ -90,6 +94,7 @@ namespace MIPS_forms.Components
                     break;
                 //sll
                 case 7: //extop posibil redundant
+                    OutPorts["regDst"] = 1;
                     OutPorts["extOp"] = 1;
                     OutPorts["ALUSrc"] = 1;
                     OutPorts["regWrite"] = 1;
@@ -97,6 +102,7 @@ namespace MIPS_forms.Components
                     break;
                 //slr
                 case 8: //extop posibil redundant
+                    OutPorts["regDst"] = 1;
                     OutPorts["extOp"] = 1;
                     OutPorts["ALUSrc"] = 1;
                     OutPorts["regWrite"] = 1;

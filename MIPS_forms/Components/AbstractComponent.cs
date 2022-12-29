@@ -58,6 +58,17 @@ namespace MIPS_forms.Components
 
         public abstract void UpdateOutput();
 
+        public virtual void ResetComponent()
+        {
+            foreach (KeyValuePair<string, int> kvp in InPorts)
+            {
+                InPorts[kvp.Key] = 0;
+            }
+            foreach (KeyValuePair<string, int> kvp in OutPorts)
+            {
+                OutPorts[kvp.Key] = 0;
+            }
+        }
         public virtual string PrintSignals()
         {
             string signals = "";
@@ -66,10 +77,10 @@ namespace MIPS_forms.Components
             {
                 signals += kvp.Key + ":" + kvp.Value + "\n";
             }
-            signals += "\n";
+            signals += "";
             foreach (KeyValuePair<string, int> kvp in OutPorts)
             {
-                signals += kvp.Key + ":" + kvp.Value + "\n";
+                signals += "\n" + kvp.Key + ":" + kvp.Value ;
             }
             
 

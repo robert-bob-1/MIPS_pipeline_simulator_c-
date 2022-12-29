@@ -9,7 +9,7 @@ namespace MIPS_forms.Components
 {
     class DataMemory : AbstractComponent
     {
-        public int[] memory = new int[2 ^ 31];
+        public int[] memory = new int[100];
         public DataMemory(Clock clock)
         {
             memory[0] = 5;
@@ -42,17 +42,29 @@ namespace MIPS_forms.Components
             if (ClkCheck == clk.Get())
             {
                 ClkCheck++;
-                if (memWrite == 1)
+                if (memWrite == 1 && address >= 0)
                 {
                     memory[address] = writeData;
                 }
             }
-            OutPorts["readData"] = memory[address];
-
+            if (address >= 0)
+            {
+                OutPorts["readData"] = memory[address];
+            }
             //connect to other components here
             for (int i = 0; i < connectedComponents.Count(); i++)
             {
                 connectedComponents[i].SetSignal(connectedComponentPort[i], OutPorts[connectedOutput[i]]);
+            }
+        }
+        public void SetMemory(string values)
+        {
+            string s = values;
+            string[] strings = s.Split('\n');
+            Array.Fill(memory, 0);
+            for (int i = 0; i < strings.Length; i++)
+            {
+                memory[i] = int.Parse(strings[i]);
             }
         }
     }

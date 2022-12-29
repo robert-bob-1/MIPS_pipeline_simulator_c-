@@ -61,7 +61,7 @@
             this.DataMemoryTextBox = new System.Windows.Forms.RichTextBox();
             this.MEMWBTextBox = new System.Windows.Forms.RichTextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.BranchTextBox = new System.Windows.Forms.RichTextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.MemtoRegTextBox = new System.Windows.Forms.RichTextBox();
@@ -70,46 +70,58 @@
             this.InstructionMemoryTextBox2 = new System.Windows.Forms.RichTextBox();
             this.RegisterFileTextBox2 = new System.Windows.Forms.RichTextBox();
             this.DataMemoryTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.instruction1Label = new System.Windows.Forms.Label();
+            this.instruction2Label = new System.Windows.Forms.Label();
+            this.instruction3Label = new System.Windows.Forms.Label();
+            this.instruction4Label = new System.Windows.Forms.Label();
+            this.instruction5Label = new System.Windows.Forms.Label();
+            this.InstructionsLabel = new System.Windows.Forms.Label();
+            this.InsertInstructionsTextBox = new System.Windows.Forms.RichTextBox();
+            this.LoadButton = new System.Windows.Forms.Button();
+            this.InsertRegisterFileTextBox = new System.Windows.Forms.RichTextBox();
+            this.InsertDataMemoryTextBox = new System.Windows.Forms.RichTextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // pcsrcMUXTextBox
             // 
-            this.pcsrcMUXTextBox.Location = new System.Drawing.Point(12, 49);
+            this.pcsrcMUXTextBox.Location = new System.Drawing.Point(215, 49);
             this.pcsrcMUXTextBox.Name = "pcsrcMUXTextBox";
-            this.pcsrcMUXTextBox.Size = new System.Drawing.Size(67, 72);
+            this.pcsrcMUXTextBox.Size = new System.Drawing.Size(79, 83);
             this.pcsrcMUXTextBox.TabIndex = 0;
             this.pcsrcMUXTextBox.Text = "";
             this.pcsrcMUXTextBox.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(461, 594);
+            this.button1.Location = new System.Drawing.Point(718, 594);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(195, 23);
             this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
+            this.button1.Text = "Increase Clock";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // JumpMUXTextBox
             // 
-            this.JumpMUXTextBox.Location = new System.Drawing.Point(44, 145);
+            this.JumpMUXTextBox.Location = new System.Drawing.Point(236, 153);
             this.JumpMUXTextBox.Name = "JumpMUXTextBox";
-            this.JumpMUXTextBox.Size = new System.Drawing.Size(65, 84);
+            this.JumpMUXTextBox.Size = new System.Drawing.Size(85, 84);
             this.JumpMUXTextBox.TabIndex = 2;
             this.JumpMUXTextBox.Text = "";
             // 
             // PCTextBox
             // 
-            this.PCTextBox.Location = new System.Drawing.Point(44, 273);
+            this.PCTextBox.Location = new System.Drawing.Point(236, 281);
             this.PCTextBox.Name = "PCTextBox";
-            this.PCTextBox.Size = new System.Drawing.Size(74, 60);
+            this.PCTextBox.Size = new System.Drawing.Size(85, 60);
             this.PCTextBox.TabIndex = 3;
             this.PCTextBox.Text = "";
             // 
             // InstructionMemoryTextBox
             // 
-            this.InstructionMemoryTextBox.Location = new System.Drawing.Point(137, 232);
+            this.InstructionMemoryTextBox.Location = new System.Drawing.Point(340, 240);
             this.InstructionMemoryTextBox.Name = "InstructionMemoryTextBox";
             this.InstructionMemoryTextBox.Size = new System.Drawing.Size(130, 185);
             this.InstructionMemoryTextBox.TabIndex = 4;
@@ -118,7 +130,7 @@
             // IFIDTextBox
             // 
             this.IFIDTextBox.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.IFIDTextBox.Location = new System.Drawing.Point(288, 67);
+            this.IFIDTextBox.Location = new System.Drawing.Point(491, 75);
             this.IFIDTextBox.Name = "IFIDTextBox";
             this.IFIDTextBox.Size = new System.Drawing.Size(112, 459);
             this.IFIDTextBox.TabIndex = 5;
@@ -126,7 +138,7 @@
             // 
             // MainControlTextBox
             // 
-            this.MainControlTextBox.Location = new System.Drawing.Point(420, 58);
+            this.MainControlTextBox.Location = new System.Drawing.Point(623, 66);
             this.MainControlTextBox.Name = "MainControlTextBox";
             this.MainControlTextBox.Size = new System.Drawing.Size(111, 131);
             this.MainControlTextBox.TabIndex = 6;
@@ -134,7 +146,7 @@
             // 
             // RegisterFileTextBox
             // 
-            this.RegisterFileTextBox.Location = new System.Drawing.Point(420, 226);
+            this.RegisterFileTextBox.Location = new System.Drawing.Point(623, 234);
             this.RegisterFileTextBox.Name = "RegisterFileTextBox";
             this.RegisterFileTextBox.Size = new System.Drawing.Size(111, 173);
             this.RegisterFileTextBox.TabIndex = 7;
@@ -143,7 +155,7 @@
             // IDEXTextBox
             // 
             this.IDEXTextBox.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.IDEXTextBox.Location = new System.Drawing.Point(564, 67);
+            this.IDEXTextBox.Location = new System.Drawing.Point(767, 75);
             this.IDEXTextBox.Name = "IDEXTextBox";
             this.IDEXTextBox.Size = new System.Drawing.Size(109, 459);
             this.IDEXTextBox.TabIndex = 8;
@@ -152,7 +164,7 @@
             // EXMEMTextBox
             // 
             this.EXMEMTextBox.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.EXMEMTextBox.Location = new System.Drawing.Point(917, 67);
+            this.EXMEMTextBox.Location = new System.Drawing.Point(1120, 75);
             this.EXMEMTextBox.Name = "EXMEMTextBox";
             this.EXMEMTextBox.Size = new System.Drawing.Size(106, 459);
             this.EXMEMTextBox.TabIndex = 9;
@@ -160,7 +172,7 @@
             // 
             // BranchAddressTextBox
             // 
-            this.BranchAddressTextBox.Location = new System.Drawing.Point(792, 90);
+            this.BranchAddressTextBox.Location = new System.Drawing.Point(995, 98);
             this.BranchAddressTextBox.Name = "BranchAddressTextBox";
             this.BranchAddressTextBox.Size = new System.Drawing.Size(110, 66);
             this.BranchAddressTextBox.TabIndex = 10;
@@ -168,7 +180,7 @@
             // 
             // ALUTextBox
             // 
-            this.ALUTextBox.Location = new System.Drawing.Point(801, 196);
+            this.ALUTextBox.Location = new System.Drawing.Point(1004, 204);
             this.ALUTextBox.Name = "ALUTextBox";
             this.ALUTextBox.Size = new System.Drawing.Size(110, 102);
             this.ALUTextBox.TabIndex = 11;
@@ -176,7 +188,7 @@
             // 
             // ALUControlTextBox
             // 
-            this.ALUControlTextBox.Location = new System.Drawing.Point(801, 356);
+            this.ALUControlTextBox.Location = new System.Drawing.Point(1004, 364);
             this.ALUControlTextBox.Name = "ALUControlTextBox";
             this.ALUControlTextBox.Size = new System.Drawing.Size(102, 104);
             this.ALUControlTextBox.TabIndex = 12;
@@ -184,7 +196,7 @@
             // 
             // ALUSrcMUXTextBox
             // 
-            this.ALUSrcMUXTextBox.Location = new System.Drawing.Point(703, 198);
+            this.ALUSrcMUXTextBox.Location = new System.Drawing.Point(906, 206);
             this.ALUSrcMUXTextBox.Name = "ALUSrcMUXTextBox";
             this.ALUSrcMUXTextBox.Size = new System.Drawing.Size(93, 105);
             this.ALUSrcMUXTextBox.TabIndex = 13;
@@ -192,7 +204,7 @@
             // 
             // RegDstMUXTextBox
             // 
-            this.RegDstMUXTextBox.Location = new System.Drawing.Point(703, 409);
+            this.RegDstMUXTextBox.Location = new System.Drawing.Point(906, 417);
             this.RegDstMUXTextBox.Name = "RegDstMUXTextBox";
             this.RegDstMUXTextBox.Size = new System.Drawing.Size(93, 135);
             this.RegDstMUXTextBox.TabIndex = 14;
@@ -201,7 +213,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 31);
+            this.label1.Location = new System.Drawing.Point(215, 31);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 15);
@@ -211,7 +223,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(44, 127);
+            this.label2.Location = new System.Drawing.Point(247, 135);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 15);
@@ -222,7 +234,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(69, 255);
+            this.label3.Location = new System.Drawing.Point(272, 263);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(22, 15);
@@ -232,7 +244,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(146, 214);
+            this.label4.Location = new System.Drawing.Point(349, 222);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(112, 15);
@@ -242,7 +254,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(326, 49);
+            this.label5.Location = new System.Drawing.Point(529, 57);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(32, 15);
@@ -252,7 +264,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(436, 41);
+            this.label6.Location = new System.Drawing.Point(639, 49);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 15);
@@ -262,7 +274,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(443, 208);
+            this.label7.Location = new System.Drawing.Point(646, 216);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(70, 15);
@@ -273,7 +285,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(601, 49);
+            this.label8.Location = new System.Drawing.Point(804, 57);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(36, 15);
@@ -283,7 +295,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(701, 180);
+            this.label9.Location = new System.Drawing.Point(904, 188);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(74, 15);
@@ -293,7 +305,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(703, 392);
+            this.label10.Location = new System.Drawing.Point(906, 400);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(73, 15);
@@ -303,7 +315,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(778, 73);
+            this.label11.Location = new System.Drawing.Point(981, 81);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(121, 15);
@@ -313,7 +325,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(829, 178);
+            this.label12.Location = new System.Drawing.Point(1032, 186);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(29, 15);
@@ -323,7 +335,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(815, 338);
+            this.label13.Location = new System.Drawing.Point(1018, 346);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(72, 15);
@@ -333,7 +345,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(943, 49);
+            this.label15.Location = new System.Drawing.Point(1146, 57);
             this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(53, 15);
@@ -343,7 +355,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(1042, 178);
+            this.label16.Location = new System.Drawing.Point(1245, 186);
             this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(79, 15);
@@ -352,7 +364,7 @@
             // 
             // DataMemoryTextBox
             // 
-            this.DataMemoryTextBox.Location = new System.Drawing.Point(1042, 196);
+            this.DataMemoryTextBox.Location = new System.Drawing.Point(1245, 204);
             this.DataMemoryTextBox.Name = "DataMemoryTextBox";
             this.DataMemoryTextBox.Size = new System.Drawing.Size(103, 189);
             this.DataMemoryTextBox.TabIndex = 30;
@@ -361,7 +373,7 @@
             // MEMWBTextBox
             // 
             this.MEMWBTextBox.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.MEMWBTextBox.Location = new System.Drawing.Point(1167, 67);
+            this.MEMWBTextBox.Location = new System.Drawing.Point(1370, 75);
             this.MEMWBTextBox.Name = "MEMWBTextBox";
             this.MEMWBTextBox.Size = new System.Drawing.Size(112, 436);
             this.MEMWBTextBox.TabIndex = 32;
@@ -371,25 +383,26 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(1049, 79);
+            this.label14.Location = new System.Drawing.Point(1252, 87);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(69, 15);
             this.label14.TabIndex = 34;
             this.label14.Text = "Branch And";
             // 
-            // richTextBox1
+            // BranchTextBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1042, 97);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(103, 74);
-            this.richTextBox1.TabIndex = 33;
-            this.richTextBox1.Text = "";
+            this.BranchTextBox.Location = new System.Drawing.Point(1245, 105);
+            this.BranchTextBox.Name = "BranchTextBox";
+            this.BranchTextBox.Size = new System.Drawing.Size(103, 74);
+            this.BranchTextBox.TabIndex = 33;
+            this.BranchTextBox.Text = "";
+            this.BranchTextBox.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged_1);
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(1189, 52);
+            this.label17.Location = new System.Drawing.Point(1392, 60);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(58, 15);
@@ -399,7 +412,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(1297, 229);
+            this.label18.Location = new System.Drawing.Point(1500, 237);
             this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(95, 15);
@@ -408,7 +421,7 @@
             // 
             // MemtoRegTextBox
             // 
-            this.MemtoRegTextBox.Location = new System.Drawing.Point(1297, 244);
+            this.MemtoRegTextBox.Location = new System.Drawing.Point(1500, 252);
             this.MemtoRegTextBox.Name = "MemtoRegTextBox";
             this.MemtoRegTextBox.Size = new System.Drawing.Size(96, 89);
             this.MemtoRegTextBox.TabIndex = 36;
@@ -417,7 +430,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(172, 78);
+            this.label19.Location = new System.Drawing.Point(375, 86);
             this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(57, 15);
@@ -426,7 +439,7 @@
             // 
             // PCAdderTextBox
             // 
-            this.PCAdderTextBox.Location = new System.Drawing.Point(158, 96);
+            this.PCAdderTextBox.Location = new System.Drawing.Point(361, 104);
             this.PCAdderTextBox.Name = "PCAdderTextBox";
             this.PCAdderTextBox.Size = new System.Drawing.Size(86, 93);
             this.PCAdderTextBox.TabIndex = 38;
@@ -434,7 +447,7 @@
             // 
             // InstructionMemoryTextBox2
             // 
-            this.InstructionMemoryTextBox2.Location = new System.Drawing.Point(137, 423);
+            this.InstructionMemoryTextBox2.Location = new System.Drawing.Point(340, 431);
             this.InstructionMemoryTextBox2.Name = "InstructionMemoryTextBox2";
             this.InstructionMemoryTextBox2.Size = new System.Drawing.Size(130, 140);
             this.InstructionMemoryTextBox2.TabIndex = 40;
@@ -442,7 +455,7 @@
             // 
             // RegisterFileTextBox2
             // 
-            this.RegisterFileTextBox2.Location = new System.Drawing.Point(420, 403);
+            this.RegisterFileTextBox2.Location = new System.Drawing.Point(623, 411);
             this.RegisterFileTextBox2.Name = "RegisterFileTextBox2";
             this.RegisterFileTextBox2.Size = new System.Drawing.Size(111, 160);
             this.RegisterFileTextBox2.TabIndex = 41;
@@ -450,17 +463,143 @@
             // 
             // DataMemoryTextBox2
             // 
-            this.DataMemoryTextBox2.Location = new System.Drawing.Point(1042, 391);
+            this.DataMemoryTextBox2.Location = new System.Drawing.Point(1245, 399);
             this.DataMemoryTextBox2.Name = "DataMemoryTextBox2";
             this.DataMemoryTextBox2.Size = new System.Drawing.Size(103, 172);
             this.DataMemoryTextBox2.TabIndex = 42;
             this.DataMemoryTextBox2.Text = "";
             // 
+            // instruction1Label
+            // 
+            this.instruction1Label.AutoSize = true;
+            this.instruction1Label.Location = new System.Drawing.Point(362, 17);
+            this.instruction1Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.instruction1Label.Name = "instruction1Label";
+            this.instruction1Label.Size = new System.Drawing.Size(70, 15);
+            this.instruction1Label.TabIndex = 43;
+            this.instruction1Label.Text = "instruction1";
+            // 
+            // instruction2Label
+            // 
+            this.instruction2Label.AutoSize = true;
+            this.instruction2Label.Location = new System.Drawing.Point(646, 17);
+            this.instruction2Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.instruction2Label.Name = "instruction2Label";
+            this.instruction2Label.Size = new System.Drawing.Size(70, 15);
+            this.instruction2Label.TabIndex = 44;
+            this.instruction2Label.Text = "instruction2";
+            // 
+            // instruction3Label
+            // 
+            this.instruction3Label.AutoSize = true;
+            this.instruction3Label.Location = new System.Drawing.Point(970, 17);
+            this.instruction3Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.instruction3Label.Name = "instruction3Label";
+            this.instruction3Label.Size = new System.Drawing.Size(70, 15);
+            this.instruction3Label.TabIndex = 45;
+            this.instruction3Label.Text = "instruction3";
+            // 
+            // instruction4Label
+            // 
+            this.instruction4Label.AutoSize = true;
+            this.instruction4Label.Location = new System.Drawing.Point(1263, 17);
+            this.instruction4Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.instruction4Label.Name = "instruction4Label";
+            this.instruction4Label.Size = new System.Drawing.Size(70, 15);
+            this.instruction4Label.TabIndex = 46;
+            this.instruction4Label.Text = "instruction4";
+            // 
+            // instruction5Label
+            // 
+            this.instruction5Label.AutoSize = true;
+            this.instruction5Label.Location = new System.Drawing.Point(1514, 17);
+            this.instruction5Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.instruction5Label.Name = "instruction5Label";
+            this.instruction5Label.Size = new System.Drawing.Size(70, 15);
+            this.instruction5Label.TabIndex = 47;
+            this.instruction5Label.Text = "instruction5";
+            // 
+            // InstructionsLabel
+            // 
+            this.InstructionsLabel.AutoSize = true;
+            this.InstructionsLabel.Location = new System.Drawing.Point(23, 28);
+            this.InstructionsLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.InstructionsLabel.Name = "InstructionsLabel";
+            this.InstructionsLabel.Size = new System.Drawing.Size(69, 15);
+            this.InstructionsLabel.TabIndex = 49;
+            this.InstructionsLabel.Text = "Instructions";
+            // 
+            // InsertInstructionsTextBox
+            // 
+            this.InsertInstructionsTextBox.Location = new System.Drawing.Point(23, 46);
+            this.InsertInstructionsTextBox.Name = "InsertInstructionsTextBox";
+            this.InsertInstructionsTextBox.Size = new System.Drawing.Size(126, 465);
+            this.InsertInstructionsTextBox.TabIndex = 48;
+            this.InsertInstructionsTextBox.Text = "";
+            // 
+            // LoadButton
+            // 
+            this.LoadButton.Location = new System.Drawing.Point(186, 744);
+            this.LoadButton.Name = "LoadButton";
+            this.LoadButton.Size = new System.Drawing.Size(126, 44);
+            this.LoadButton.TabIndex = 50;
+            this.LoadButton.Text = "Load instructions and reset program";
+            this.LoadButton.UseVisualStyleBackColor = true;
+            this.LoadButton.Click += new System.EventHandler(this.InstructionsButton_Click);
+            // 
+            // InsertRegisterFileTextBox
+            // 
+            this.InsertRegisterFileTextBox.Location = new System.Drawing.Point(23, 541);
+            this.InsertRegisterFileTextBox.Name = "InsertRegisterFileTextBox";
+            this.InsertRegisterFileTextBox.Size = new System.Drawing.Size(126, 113);
+            this.InsertRegisterFileTextBox.TabIndex = 51;
+            this.InsertRegisterFileTextBox.Text = "";
+            // 
+            // InsertDataMemoryTextBox
+            // 
+            this.InsertDataMemoryTextBox.Location = new System.Drawing.Point(23, 675);
+            this.InsertDataMemoryTextBox.Name = "InsertDataMemoryTextBox";
+            this.InsertDataMemoryTextBox.Size = new System.Drawing.Size(126, 113);
+            this.InsertDataMemoryTextBox.TabIndex = 52;
+            this.InsertDataMemoryTextBox.Text = "";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(23, 523);
+            this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(245, 15);
+            this.label20.TabIndex = 53;
+            this.label20.Text = "Register File Memory (separated by newlines)";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(23, 657);
+            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(79, 15);
+            this.label21.TabIndex = 54;
+            this.label21.Text = "Data Memory";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1622, 629);
+            this.ClientSize = new System.Drawing.Size(1622, 870);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.InsertDataMemoryTextBox);
+            this.Controls.Add(this.InsertRegisterFileTextBox);
+            this.Controls.Add(this.LoadButton);
+            this.Controls.Add(this.InstructionsLabel);
+            this.Controls.Add(this.InsertInstructionsTextBox);
+            this.Controls.Add(this.instruction5Label);
+            this.Controls.Add(this.instruction4Label);
+            this.Controls.Add(this.instruction3Label);
+            this.Controls.Add(this.instruction2Label);
+            this.Controls.Add(this.instruction1Label);
             this.Controls.Add(this.DataMemoryTextBox2);
             this.Controls.Add(this.RegisterFileTextBox2);
             this.Controls.Add(this.InstructionMemoryTextBox2);
@@ -470,7 +609,7 @@
             this.Controls.Add(this.MemtoRegTextBox);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.BranchTextBox);
             this.Controls.Add(this.MEMWBTextBox);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.DataMemoryTextBox);
@@ -546,7 +685,7 @@
         private RichTextBox DataMemoryTextBox;
         private RichTextBox MEMWBTextBox;
         private Label label14;
-        private RichTextBox richTextBox1;
+        private RichTextBox BranchTextBox;
         private Label label17;
         private Label label18;
         private RichTextBox MemtoRegTextBox;
@@ -555,5 +694,17 @@
         private RichTextBox InstructionMemoryTextBox2;
         private RichTextBox RegisterFileTextBox2;
         private RichTextBox DataMemoryTextBox2;
+        private Label instruction1Label;
+        private Label instruction2Label;
+        private Label instruction3Label;
+        private Label instruction4Label;
+        private Label instruction5Label;
+        private Label InstructionsLabel;
+        private RichTextBox InsertInstructionsTextBox;
+        private Button LoadButton;
+        private RichTextBox InsertRegisterFileTextBox;
+        private RichTextBox InsertDataMemoryTextBox;
+        private Label label20;
+        private Label label21;
     }
 }

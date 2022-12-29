@@ -13,25 +13,45 @@ namespace MIPS_forms.Components
         
         public InstructionMemory()
         {
-            instructionMemory.AddRange(new List<String> { "add r3, r2, r1",
+            instructionMemory.AddRange(new List<String> {
+                                                          "add r1, r2, r1", //0th instruction
+                                                          "sub r3, r3, r4",
+                                                          "and r5, r5, r6",
+                                                          "or r7, r7, r8",  //3rd instruction
+                                                          "xor r9, r10, r9",
+                                                          "addi r11, r11, 16",
+                                                          "noop",
+                                                          "noop",
+                                                          "subi r12, r12, 100",
+                                                          "andi r13, r11, 17",
+                                                          "ori r14, r11, 17",
+                                                          "sll r15, r11, 2",
+                                                          "slr r16, r11, 2",
                                                           "noop",
                                                           "noop",
                                                           "noop",
                                                           "lw r1, 0(r0)",
                                                           "lw r2, 1(r0)",
+                                                          "sw r11, 11(r0)",
+                                                          "noop",
+                                                          "jump 25", //20th instruction
                                                           "noop",
                                                           "noop",
                                                           "noop",
-                                                          "beq r1, r2, 1",
+                                                          "noop",
+                                                          "beq r2, r3, 6", //25th
                                                           "noop",
                                                           "noop",
                                                           "noop",
-                                                          "add r1, r2, r3",
                                                           "noop",
                                                           "noop",
                                                           "noop",
-                                                          "sw r3, 3(r0)",
-                                                          "jump 0"
+                                                          "jump 0",
+
+                                                          "noop",
+                                                          "noop",
+                                                          "noop",
+                                                          "noop"
 
                                                             });
             InPorts["pc_in"] = 0;
@@ -40,7 +60,7 @@ namespace MIPS_forms.Components
             OutPorts["instr20_16"] = 0;
             OutPorts["instr15_0"] = 0;
             OutPorts["instr5_0"] = 0;
-            OutPorts["instr15_11"] = 0;
+            OutPorts["instr15_11"]  = 0;
         }
         public string memoryToString()
         {
@@ -58,11 +78,21 @@ namespace MIPS_forms.Components
             //first separate the string
             instruction = instruction.Replace(",", "");
             instruction = instruction.Replace(")", "");
-            instruction = instruction.Replace("s", "");
-            instruction = instruction.Replace("r", "");
             instruction = instruction.Replace("$", "");
 
             string[] instructionList = instruction.Split(' ');
+            if (instructionList.Length > 1 && instructionList[0] != "jump" && instruction != "noop")
+            {
+                instructionList[1] = instructionList[1].Replace("r", "");
+                instructionList[1] = instructionList[1].Replace("s", "");
+                instructionList[2] = instructionList[2].Replace("r", "");
+                instructionList[2] = instructionList[2].Replace("s", "");
+                if (instructionList[0] != "lw" && instructionList[0] != "sw")
+                {
+                    instructionList[3] = instructionList[3].Replace("r", "");
+                    instructionList[3] = instructionList[3].Replace("s", "");
+                }
+            }
 
             int register1 = 0, register2 = 0, destinationRegister = 0;
             int opcode = 0, sa = 0, func = 0, immediate = 0, targetAddr = 0;
@@ -130,14 +160,14 @@ namespace MIPS_forms.Components
                     immediate = int.Parse(instructionList[3]);
                     break;
                 case "ori":
-                    destinationRegister = int.Parse(instructionList[1]);
+                    register1 = int.Parse(instructionList[1]);
                     register1 = int.Parse(instructionList[2]);
                     opcode    = 4;
                     immediate = int.Parse(instructionList[3]);
                     break;
                 case "beq":
-                    destinationRegister = int.Parse(instructionList[1]);
-                    register1 = int.Parse(instructionList[2]);
+                    register1 = int.Parse(instructionList[1]);
+                    register2 = int.Parse(instructionList[2]);
                     opcode    = 5;
                     immediate = int.Parse(instructionList[3]);
                     break;
@@ -193,6 +223,11 @@ namespace MIPS_forms.Components
 
         }
 
+        public string GetCurrentInstruction()
+        {
+            return instructionMemory.ElementAt(InPorts["pc_in"]);
+        }
+
         public override string PrintSignals()
         {
             string signals;
@@ -209,10 +244,7 @@ namespace MIPS_forms.Components
             {
                 signals += kvp.Key + ":" + kvp.Value + "\n";
             }
-
-
             return signals;
-
         }
 
         public override void UpdateOutput()
@@ -229,11 +261,20 @@ namespace MIPS_forms.Components
             else
                 instructionToInt("noop");
 
-
             //connect to other components here
             for (int i = 0; i < connectedComponents.Count(); i++)
             {
                 connectedComponents[i].SetSignal(connectedComponentPort[i], OutPorts[connectedOutput[i]]);
+            }
+        }
+        public void SetMemory(string values)
+        {
+            string s = values;
+            string[] strings = s.Split('\n');
+            instructionMemory.Clear();
+            for (int i = 0; i < strings.Length; i++)
+            {
+                instructionMemory.Add(strings[i]);
             }
         }
     }
