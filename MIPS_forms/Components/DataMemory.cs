@@ -9,7 +9,7 @@ namespace MIPS_forms.Components
 {
     class DataMemory : AbstractComponent
     {
-        public int[] memory = new int[100];
+        public int[] memory = new int[10000];
         public DataMemory(Clock clock)
         {
             memory[0] = 5;
@@ -47,7 +47,7 @@ namespace MIPS_forms.Components
                     memory[address] = writeData;
                 }
             }
-            if (address >= 0)
+            if (address >= 0 && address <= 10000)
             {
                 OutPorts["readData"] = memory[address];
             }

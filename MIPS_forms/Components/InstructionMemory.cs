@@ -160,7 +160,7 @@ namespace MIPS_forms.Components
                     immediate = int.Parse(instructionList[3]);
                     break;
                 case "ori":
-                    register1 = int.Parse(instructionList[1]);
+                    destinationRegister = int.Parse(instructionList[1]);
                     register1 = int.Parse(instructionList[2]);
                     opcode    = 4;
                     immediate = int.Parse(instructionList[3]);
@@ -169,12 +169,6 @@ namespace MIPS_forms.Components
                     register1 = int.Parse(instructionList[1]);
                     register2 = int.Parse(instructionList[2]);
                     opcode    = 5;
-                    immediate = int.Parse(instructionList[3]);
-                    break;
-                case "bneq":
-                    destinationRegister = int.Parse(instructionList[1]);
-                    register1 = int.Parse(instructionList[2]);
-                    opcode    = 6;
                     immediate = int.Parse(instructionList[3]);
                     break;
                 case "sll":
@@ -276,6 +270,15 @@ namespace MIPS_forms.Components
             {
                 instructionMemory.Add(strings[i]);
             }
+            instructionMemory.Add("noop");
+            instructionMemory.Add("noop");
+            instructionMemory.Add("noop");
+            instructionMemory.Add("noop");
+            instructionMemory.Add("noop");
+            instructionMemory.Add("noop");
+            instructionMemory.Add("noop");
+            instructionMemory.Add("noop");
+            instructionMemory.Add("noop");
         }
     }
 }
